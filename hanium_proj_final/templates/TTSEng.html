@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h3>문자를 입력해주세요</h3>
+	<p>영어:</p>
+	<form action="/TTSEng" method="post" enctype="multipart/form-data">
+		<input type="text" id="english" name="english" required>
+		<button type="submit" id="btn">제출</button>
+	</form>
+	<p>음성:</p>
+	{% if audio_file_path %}
+		<audio controls>
+    		<source src="{{ audio_file_path }}" type="audio/mpeg">
+    		Your browser does not support the audio element.
+  		</audio>
+	{% endif %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h3>문자를 입력해주세요</h3>
+	<p>한글:</p>
+	<form action="/KorToBraille" method="post" enctype="multipart/form-data">
+		<input type="text" id="korean" name="korean" required>
+		<button type="submit" id="btn">제출</button>
+	</form>
+	<p>점자:</p>
+	{% if result %}
+		<p>{{ result }}</p>
+	{% endif %}
+</body>
+</html>

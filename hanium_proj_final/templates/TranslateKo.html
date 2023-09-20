@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#copy-btn").click(function() {
+        var textToCopy = $("#translated-text").text();
+        copyToClipboard(textToCopy);
+      });
+
+      function copyToClipboard(text) {
+        var $tempInput = $("<input>");
+        $("body").append($tempInput);
+        $tempInput.val(text).select();
+        document.execCommand("copy");
+        $tempInput.remove();
+
+        alert("텍스트가 복사되었습니다");
+      }
+    });
+  </script>
+</head>
+    
+<body>
+	<h3>한글→영어 번역</h3>
+	<p>텍스트:</p>
+	<form action="/TranslateKo" method="post" enctype="multipart/form-data">
+		<input type="text" id="transKo" name="transKo" required>
+		<button type="submit" id="btn">번역</button>
+	</form>
+	<p>번역 결과:</p>
+	{% if result %}
+		<div id = "translated-text">{{ result }}</div>
+	{% endif %}
+    <button id="copy-btn">복사</button>
+</body>
+    
+</html>

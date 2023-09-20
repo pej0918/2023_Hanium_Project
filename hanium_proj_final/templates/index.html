@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Index.css') }}">
+</head>
+
+<body>
+    <h1>E-yes AI
+        <img src="{{ url_for('static', filename='img/Logo.png') }}" alt="E-yes"/>
+    </h1>
+	
+	<div class="page_box">
+		<div class="page_button">
+			<a href="/Translate">
+				<h3>번역
+				<img src="{{ url_for('static', filename='img/translate.png') }}" alt="Translate" />
+				</h3>
+				<h6> Translate </h6>
+			</a>
+		</div>
+
+		<div class="page_button">
+			<a href="/Summary_choose2">
+				<h3>문서 요약
+				<img src="{{ url_for('static', filename='img/summary.png') }}" alt="Summary" />
+				</h3>
+				<h6> Summary </h6>
+			</a>
+		</div>
+
+		<div class="page_button">
+			<a href="/Guide">
+				<h3>가이드
+				<img src="{{ url_for('static', filename='img/guide.png') }}" alt="Guide" />
+				</h3>
+				<h6> Guide </h6>
+			</a>
+		</div>
+	</div>
+    
+</body>
+
+<footer>
+	Copyright 2023. E-yes AI 가이드. All Rights Reserved.
+</footer>
+
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h3>점자를 입력해주세요</h3>
+	<p>점자:</p>
+	<form action="/BrailleToEng" method="post" enctype="multipart/form-data">
+		<input type="text" id="braille" name="braille" required>
+		<button type="submit" id="btn">제출</button>
+	</form>
+	<p>영어:</p>
+	{% if result %}
+		<p>{{ result }}</p>
+	{% endif %}
+</body>
+</html>

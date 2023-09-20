@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <title>사용자 입력</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/summary.css') }}">
+    
+    
+</head>
+<body>
+    <h1 onclick="location.href='/'">E-yes AI
+      <img width="70" height="70" onclick="location.href='/'" src="https://img.icons8.com/external-goofy-flat-kerismaker/96/external-Braille-communication-goofy-flat-kerismaker.png" alt="E-yes"/>
+        </h1>
+<div class="cont" style="background-color: #F5F5F5;">
+  <div class='box1'>언어</div>
+  <div class='box2'>영어 문서 요약</div>
+  <form id='target' method="post" action="/Summary_en" enctype="multipart/form-data">
+	        <div class="form-group">
+            <label for="pdfFile">PDF</label>
+    </div></form>
+  <form id='targets' action="/fileupload_summary_en" method=post enctype=multipart/form-data>
+	<div class="uploading">
+    <input class="upload-name" value="파일을 업로드해주세요." disabled="disabled">
+    
+    <label for="FileButton">업로드</label>
+    <input id='FileButton' type=file name=savefile >
+         <input id='UploadButton' type="submit" value=Upload>
+           
+    </div></form>
+  
+	<div class="form-groups">
+            <label for="textInput">텍스트</label></div>
+  
+  <form id='target2' method="post" action="/Summary_en" >
+	<div class="text_area">
+	  <textarea id="textInput" name="text_input" rows="20" style=" width:98%;">{{ text_result }}</textarea></div>
+    </div>
+	<button type="submit" class = "submit" style = "display: inline-block; width: 90%; background-color: #f9e000; color: black;font-size: 20px; border: none; border-radius: 5px; font-weight:550;">제출</button>
+        
+    </form>
+<div id="loading">  </div>
+    <script>
+        
+                $(document).ready(function() {
+        $('#FileButton').on('change', function() {
+            // 파일 선택 시 자동으로 upload 버튼 클릭
+            $('#UploadButton').trigger('click');
+        });
+    });
+        
+    /*로딩 완료시 로딩 화면 숨기기*/
+    $(document).ready(function() { 
+    $('#loading').hide();
+    
+    /*로딩화면 띄우기*/
+    $('#target').submit(function(){
+    $('#loading').show();
+     return true; });
+    });
+        
+        /*로딩 완료시 로딩 화면 숨기기*/
+    $(document).ready(function() { 
+    $('#loading').hide();
+    
+    /*로딩화면 띄우기*/
+    $('#target2').submit(function(){
+    $('#loading').show();
+     return true; });
+    });
+    </script>
+</body>
+  <footer style = "color: gray">
+        Copyright 2023. E-yes AI 가이드. All Rights Reserved.
+    </footer>
+</html>

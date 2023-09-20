@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Translation Result</title>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/result.css') }}">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" defer src="{{ url_for('static', filename='js/result.js') }}"></script>
+</head>
+
+<body>
+	<h1 onclick="location.href='/'">E-yes AI
+		<img src="{{ url_for('static', filename='img/Logo.png') }}" alt="E-yes"/>
+    </h1>
+	
+    <h2>
+	{% if session['input_language'] == 'kor' %}한글{% elif session['input_language'] == 'korb' %}한글 점자{% elif session['input_language'] == 'eng' %}영어{% else %}영어 점자{% endif %} → {% if session['output_language'] == 'kor' %}한글{% elif session['output_language'] == 'korb' %}한글 점자{% elif session['output_language'] == 'eng' %}영어{% else %}영어 점자{% endif %} 번역 결과
+	</h2>
+
+    <!-- Display flashed messages -->
+    {% with mesg = get_flashed_messages() %}
+        {% if mesg %}
+            <div>
+                {% for message in mesg %}
+                <p style="color: {% if message.startswith('Error') %}red{% else %}green{% endif %};">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Display translation result -->
+    <div id='trans_result' class="result-container">
+        {% if result %}
+        {{ result }}
+        {% endif %}
+    </div>
+	
+	<a class="down_box" href="{{ pdf_file_path }}">
+		<button class="down_button">파일 저장</button>
+	</a>
+	
+	<!--오디오 파일이 있는 경우-->
+	{% if audio_file_path %}
+	<!-- Audio player -->
+	<audio controls>
+		<source src="{{ audio_file_path }}" type="audio/mpeg">
+		Your browser does not support the audio element.
+	</audio>
+
+    <a class="down_box" href="{{ audio_file_path }}" download="audio_file.mp3">
+        <button class="down_button">음성 저장</button>
+    </a>
+	{% endif %}
+
+	<!--맞춤법 검사를 선택한 경우-->
+    {% if session['grammar_check'] %}
+		<button type="submit" id="grammar_button" onclick="clickGrammarButton()">▼ 맞춤법 비교 확인하기</button>
+	
+		<!-- compare 페이지 -->
+		<div class="grammar_box" id="grammar_compare" style="display: none;">
+			<h2>교정 전/후를 비교해보세요</h2>
+			
+			<div class="box1">
+				교정 전
+			</div>
+			<div class="box2">
+				{{ grammar_before_result }}
+			</div>
+			
+			<div class="box1">
+				교정 후
+			</div>
+			<div class="box2">
+				{{ grammar_result }}
+			</div>
+			
+			<div class="box1">
+				결과 비교
+			</div>
+			<div class="box2">
+				{{ compare_result | safe }}
+			</div>
+	</div>
+    {% endif %}
+	
+	
+
+    {% with mesg = get_flashed_messages() %}
+        {% if mesg %}
+            <script>
+                // 입력 언어가 잘못되었다면 알람
+                {% for message in mesg %}
+                    alert("{{ message }}");
+                    history.back();
+                {% endfor %}
+            </script>
+        {% endif %}
+    {% endwith %}
+	
+
+    <div id="loading"> </div>
+</body>
+	
+<footer id="result_footer">
+	Copyright 2023. E-yes AI 가이드. All Rights Reserved.
+</footer>
+	
+</html>

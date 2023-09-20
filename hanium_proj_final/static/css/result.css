@@ -1,0 +1,193 @@
+body {
+	position: flex;
+	justify-content: center;
+    align-items: center;
+	height: 800px;
+	width: 412px;
+	/*height: 100vh; */
+	margin: 0 auto;
+	background-color: #F5F5F5;
+}
+
+
+h1 {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -15px;
+	height: 100px;
+	text-align: center;
+	background-color: #f9e000;
+}
+
+h1 img {
+	width: 70px;
+	height: 70px;
+	position: relative;
+	top: 20px;
+}
+
+h2 {
+	text-align: center;
+}
+
+#loading {
+	border: 16px solid #f3f3f3;
+	border-top: 16px solid #3498db;
+	border-radius: 50%;
+	width: 120px;
+	height: 120px;
+	animation: spin 2s linear infinite;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+@keyframes spin {
+	0% {transform:translate(-50%, -50%) rotate(0deg); }
+	100% {transform:translate(-50%, -50%) rotate(360deg); }
+}
+
+
+.result-container {
+	display: block;
+	position: relative;
+    align-items: center;
+	vertical-align: middle;
+	padding: 7px;
+    width: 366px;
+    height: 300px;
+	margin-left: 14px;
+    background-color: #fff;
+    border-radius: 10px;
+    transition: background-color 0.3s;
+	
+	font-size: 20px;
+	font-weight: 500;
+	overflow-x: hidden; /* 가로 스크롤바 숨김 */
+  	overflow-y: scroll; /* 세로 스크롤바 표시 */
+  	word-break: break-all;
+}
+
+.down_box {
+	display: inline-block;
+	position: relative;
+	float: left;
+	align-items: center;
+	justify-content: center;
+	width: 412px;
+}
+
+.down_button {
+	display: inline-block;
+	position: relative;
+	float: left;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 40px;
+	background-color:#f9e000;
+	color: black;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 10px 102px;
+	
+	font-weight: 500;
+	font-size: 20px;
+}
+
+audio {
+	display: inline-block;
+	position: relative;
+	align-items: center;
+	justify-content: center;
+	width: 408px;
+	margin-left: 2px;
+	margin-top: 20px;
+}
+
+/* 오디오 태그 색 변경 가능
+audio::-webkit-media-controls-panel {
+	background-color: blue; /* 패널 배경색 변경 
+	color: #333; /* 텍스트 색상 변경 
+}
+*/
+
+#grammar_button {
+	display: inline-block;
+	position: relative;
+	float: left;
+	align-items: center;
+	justify-content: center;
+	width: 250px;
+	height: 40px;
+	background-color: lightgray;
+	color: black;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	margin: 15px 76px;
+	
+	font-weight: 500;
+	font-size: 20px;
+}
+
+.grammar_box {
+	/* 기본: 안보이는 상태 */
+	
+	position: relative;
+	justify-content: center;
+	align-items: center;
+	width: 412px;
+	height: 500px;
+	margin-top: 120px;
+}
+
+.box1 {
+	display: inline-block;
+	position: relative;
+	float: left;
+    width: 366px;
+    height: 30px;
+	margin-left: 14px;
+	padding: 10px;
+    background-color:#f9e000;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+	
+	font-size: 25px;
+	font-weight: 600;
+	line-height: 30px;
+}
+
+.box2 {
+	display: block;
+	position: relative;
+	float: left;
+    width: 366px;
+    height: 150px;
+	margin-left: 14px;
+	margin-bottom: 20px;
+	padding: 10px;
+    background-color:#fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+	
+	font-size: 20px;
+	font-weight: 500;
+	overflow-x: hidden; /* 가로 스크롤바 숨김 */
+  	overflow-y: scroll; /* 세로 스크롤바 표시 */
+  	word-break: break-all;
+}
+
+
+footer {
+	display: block;
+	position: absolute;
+	width: 412px;
+	text-align: center;
+	top: 770px;
+	color: gray;
+}

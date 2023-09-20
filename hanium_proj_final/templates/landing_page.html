@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome</title>
+</head>
+<body>
+    <h1>반갑습니다!</h1>
+    <p>저희는 2가지 유형의 서비스를 제공하고 있습니다.</p>
+    <p>원하시는 유형을 선택하고 서비스를 즐겨보세요!    </p>
+    <form method="post" action="/">
+        <label for="member">편집자용</label>
+        <input type="radio" name="response" value="member" id="member" required>
+        <label for="non_member">장애인용</label>
+        <input type="radio" name="response" value="non_member" id="non_member" required>
+        <br>
+        <button type="submit">시작</button>
+    </form>
+    {% with mesg = get_flashed_messages() %}
+    {% if mesg %}
+    <div>
+        {% for message in mesg %}
+        <p style="color: red;">{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+</body>

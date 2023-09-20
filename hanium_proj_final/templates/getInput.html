@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>사용자 입력</title>
+    <!--<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/inputstyle.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}">-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/getInput.css') }}">
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" defer src="{{ url_for('static', filename='js/getInput.js') }}"></script>
+</head>
+	
+<body>
+    <h1 onclick="location.href='/'">E-yes AI
+		<img src="{{ url_for('static', filename='img/Logo.png') }}" alt="E-yes"/>
+    </h1>
+	
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <script>
+            alert("{{messages[-1]}}")
+        </script>
+        {% endif %}
+    {% endwith %}
+    
+    
+  	<div class = "cont">
+		<div class="box1">
+			언어
+		</div>
+		<div class="box2">
+			{% if session['input_language'] == 'kor' %}한글{% elif session['input_language'] == 'korb' %}한글 점자{% elif session['input_language'] == 'eng' %}영어{% else %}영어 점자{% endif %} → {% if session['output_language'] == 'kor' %}한글{% elif session['output_language'] == 'korb' %}한글 점자{% elif session['output_language'] == 'eng' %}영어{% else %}영어 점자{% endif %}
+		</div>
+		
+		<div class="box1">
+			맞춤법 검사
+		</div>
+		<div class="box2">
+			{% if session['grammar_check'] %}O{% else %}X{% endif %}
+		</div>
+		
+		<!-- Form for uploading a PDF file -->
+		<form id='target' method="post" action="/getInput" enctype="multipart/form-data" onsubmit="showPopup()">
+			<div class="box1">
+				<label for="pdfFile">PDF 파일</label>
+			</div>
+		</form>
+      
+		<!--<form id='targets' action="/fileupload_translate" method="post" enctype=multipart/form-data>
+		  <p><input type=file name=savefile>
+			 <input type="submit" value=제출 class="submit">
+		</form>-->
+		<form id='targets' action="/fileupload_translate" method=post enctype=multipart/form-data>
+			<div class="file_box">
+				<!--
+				<label for='FileButton'>파일 선택</label>
+				<input id='FileButton' type=file name=savefile>-->
+				<input class="upload-name" value="파일 선택" disabled="disabled">
+
+				<label for="FileButton">업로드</label> 
+				<input type="file" id="FileButton" name=savefile class="upload-hidden"> 
+				<input id='UploadButton' name='click_btn' type="submit" value=Upload style="display:hidden;">
+			</div>
+		</form>
+        
+		<!-- Input form for direct text input -->
+		<form id='target2' method="post" action="/getInput" onsubmit="showPopup()" >		
+			<textarea class="text_box" id="textInput" name="text_input" rows="1" placeholder="텍스트를 입력하세요.">{{ text_input }}</textarea>
+
+			<button type="submit" class = "submit" id="btn">제출</button>
+			<!--<div class="form-group" style = "text-align: center">
+				<label for="textInput">문자 텍스트 입력:</label>
+				<textarea id="textInput" name="text_input" rows="10">{{ text_result }}</textarea>
+			  <button type="submit" class = "submit" style = "display: inline-block">제출</button>
+			</div>-->
+
+		</form>
+  	</div>
+	<div id="loading"> </div>
+
+</body>
+
+<footer>
+	Copyright 2023. E-yes AI 가이드. All Rights Reserved.
+</footer>
+	
+</html>

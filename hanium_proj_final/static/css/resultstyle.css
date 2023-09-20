@@ -1,0 +1,62 @@
+/* Reset some default styles for better consistency */
+body, h1, p, form, button {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 15px;
+}
+
+
+form {
+    margin-bottom: 20px;
+}
+
+form p {
+    margin-bottom: 10px;
+}
+.result-container {
+    border: 1px solid #00462A; /* Add a thin border with a light color */
+    padding: 50px; /* Add some padding inside the container */
+    margin: 50px;
+}
+/* Audio player styling */
+audio {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
+/* Make the buttons bigger on the comparison form */
+#compareForm button {
+    padding: 15px 30px;
+    font-size: 20px;
+}
+
+

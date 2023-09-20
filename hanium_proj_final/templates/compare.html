@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comparison Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/comparestyle.css') }}">
+    <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/common.css') }}"> -->
+</head>
+<body>
+  <h1>E-yes AI 가이드
+      <img width="70" height="70" src="https://img.icons8.com/external-goofy-flat-kerismaker/96/external-Braille-communication-goofy-flat-kerismaker.png" alt="E-yes"/>
+      </h1>
+  <div class="nottitle">
+    <h2>교정 전/후를 비교해보세요!</h2>
+
+    <!-- 사용자의 입력을 받는 form -->
+    <div class="compare-container">
+        <div class="input-container">
+            <h3>교정 전</h3>
+            <div class="inputs">
+                <p>입력: {{ text_input }}</p>
+            </div>
+        </div>
+        
+        <div class="input-container">
+            <h3>교정 후</h3>
+            <div class="results">
+                <p>교정: {{ result }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 그 차이를 보여주는 부분 -->
+    <div class="diff-container">
+        <h3>둘의 차이는...</h3>
+        <div class="fixs">
+        <p>비교: {{ compare_result }} </p>
+      </div>
+    </div>
+  </div>
+</body>
+   <footer style = "color: gray">
+        Copyright 2023. E-yes AI 가이드. All Rights Reserved.
+    </footer>
+</html>

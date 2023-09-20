@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Translation Result</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='resultstyle.css') }}">
+</head>
+<body>
+    <h1>번역 결과</h1>
+    <!-- Display flashed messages -->
+    {% with mesg = get_flashed_messages() %}
+        {% if mesg %}
+            <div>
+                {% for message in mesg %}
+                    <p style="color: {% if message.startswith('Error') %}red{% else %}green{% endif %};">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Form for PDF saving -->
+
+    <form id="pdfForm" action = "/result_download" method = "POST" enctype = "multipart/form-data">
+        <div class="down_btn">
+            
+        <a href="{{ pdf_file_path }}" download><button>pdf 저장</button></a></div>
+    </form>
+
+    <!-- Display translation result -->
+    <div class="result-container">
+        {% if result %}
+            <p>{{ result }}</p>
+        {% endif %}
+    </div>
+	
+    {% if audio_file_path %}
+		<!-- Audio player -->
+		<audio controls>
+			<source src="{{ audio_file_path }}" type="audio/mpeg">
+			Your browser does not support the audio element.
+		</audio>
+	
+		<!-- Form for audio saving -->
+		<form id="audioForm" method="post" action="/save_audio">
+			<button type="submit">음성 저장</button>
+		</form>
+    {% endif %}
+    
+    <form id="compareform" class="compare" action="/compare" method="post">
+    <div class="button-container">
+        <button type="submit" name="class_name" value="compare">비교</button>
+        <p>교정 결과 달라진 부분을 확인해보세요!!</p>
+        </div>
+                <p>
+                {{ compare_result }}
+        </p>
+        <p>
+                {{ total_result }}
+        </p>
+    </form>
+
+
+{% with mesg = get_flashed_messages() %}
+        {% if mesg %}
+            <script>
+                // 입력 언어가 잘못되었다면 알람
+                {% for message in mesg %}
+                    alert("{{ message }}");
+                     history.back();
+                {% endfor %}
+            </script>
+        {% endif %}
+{% endwith %}
+    
+    <script>
+        function saveAudio() {
+            // Replace 'audio_file_url' with the actual URL of the audio file
+            const audioFileURL = '{{ audio_file_path }}';
+
+            // Create a temporary anchor element to trigger the download
+            const a = document.createElement('a');
+            a.href = audioFileURL;
+            a.download = 'translation_audio.mp3';
+            a.click();
+        }
+
+        const audioForm = document.getElementById('audioForm');
+
+        audioForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            saveAudio();
+        });
+
+        document.getElementById('compareform').onsubmit = function () {
+        // Get the input_language and output_language values from the session variables
+        const input_language = '{{ session.get("input_language") }}';
+        const output_language = '{{ session.get("output_language") }}';
+        
+        // Append the input_language and output_language as query parameters to the URL
+        const url = '/compare?input_language=' + encodeURIComponent(input_language) + '&output_language=' + encodeURIComponent(output_language);
+        
+        // Redirect to the /compare route with the query parameters
+        window.location.href = url;
+
+        return false; // Prevent the default form submit behavior
+    };
+    </script>
+</body>
+</html>
+

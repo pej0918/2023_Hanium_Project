@@ -1,0 +1,61 @@
+/* Set font style for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+/* Style the main heading */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: black;
+}
+
+/* Style labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style text areas */
+textarea {
+    width: 100%;
+    padding: 10px;
+}
+p {
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold; /* Add bold font weight to the labels */
+}
+/* Style buttons */
+button {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    padding: 10px;    
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cont {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  background-color: #e4f0eb;
+}
+@media screen and (max-width: 768px) {
+      .cont {
+        width: 80%;
+        height: 100%
+      }
+    }

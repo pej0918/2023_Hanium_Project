@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/Translate.css') }}">
+	<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script type="text/javascript" defer src="{{ url_for('static', filename='js/Translate.js') }}"></script>
+</head>
+	
+<body>
+	<h1 onclick="location.href='/'">E-yes AI
+		<img src="{{ url_for('static', filename='img/Logo.png') }}" alt="E-yes"/>
+    </h1>
+
+	<form id='target' action="/Translate" method="post">
+		<div class="select_box">
+			<h2>입력 언어를 선택하세요</h2>
+			<div class="radio-box">
+				<label class="custom-button">
+					<input type="radio" name="input_check" value="kor" required>한글
+				</label>
+				<label class="custom-button">
+					<input type="radio" name="input_check" value="eng" required>영어
+				</label>
+				<label class="custom-button">
+					<input type="radio" name="input_check" value="korb" required>한글 점자
+				</label>
+				<label class="custom-button">
+					<input type="radio" name="input_check" value="engb" required>영어 점자
+				</label>
+			</div>
+		</div>
+
+		<div class="select_box">
+			<h2>출력 언어를 선택하세요</h2>
+			<div class="radio-box">
+				<label class="custom-button">
+					<input type="radio" name="output_check" value="kor" required>한글
+				</label>
+				<label class="custom-button">
+					<input type="radio" name="output_check" value="eng" required>영어
+				</label>
+				<label class="custom-button">
+					<input type="radio" name="output_check" value="korb" required>한글 점자
+				</label>
+				<label class="custom-button">
+					<input type="radio" name="output_check" value="engb" required>영어 점자
+				</label>
+			</div>
+		</div>
+     
+		<div class="switch-container">
+			<label class="switch-button">
+			  <h2>맞춤법 검사</h2>
+				<input type="checkbox" name="grammar_check" value="grammar" hidden>
+				<span class="onoff-switch"></span>
+			</label>
+		</div>
+			<br><br>
+		
+		<button type="submit" class = "submit" id="btn">제출</button>
+	</form>
+    <div id="loading"> </div>
+
+<div class="error-message">Please choose an option.</div>
+</body>
+  
+<footer>
+	Copyright 2023. E-yes AI 가이드. All Rights Reserved.
+</footer>
+  
+</html>

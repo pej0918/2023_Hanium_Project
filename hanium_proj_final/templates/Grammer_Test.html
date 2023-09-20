@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      input{
+        width: 1000px;
+        height: 200px;
+        vertical-align:middle;
+        margin: auto;
+
+      }
+    </style>
+  </head>
+<body>
+	<h3>텍스트 내용을 입력해주세요</h3>
+	<form action="/Grammer_Test" method="POST" enctype="multipart/form-data">
+		<input type="text" id="grammer" name="grammer" required>
+    <button type="submit" id="btn">제출</button>
+	</form>
+	<h3>검사 결과</h3>
+		<p>{{ result }}</p>
+</body>
+</html>

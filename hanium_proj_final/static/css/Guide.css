@@ -1,0 +1,84 @@
+body {
+	position: flex;
+	justify-content: center;
+    align-items: center;
+	height: 800px;
+	width: 412px;
+	margin: 0 auto;
+	background-color: #F5F5F5;
+}
+
+
+h1 {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -15px;
+	height: 100px;
+	text-align: center;
+	background-color: #f9e000;
+}
+
+h1 img {
+	width: 70px;
+	height: 70px;
+	position: relative;
+	top: 20px;
+}
+
+.page_box {
+	display: block;
+	position: relative;
+	height: 650px;
+}
+
+.page_button {
+	display: inline-block;
+	position: relative; /* 이거임 */
+	float: left;
+	width: 400px;
+	height: 150px;
+	margin: 15px auto;
+	justify-content: center;
+	text-align: center;
+}
+
+
+.page_button a {
+	display: inline-block;
+	position: relative;
+	justify-content: center;
+	text-align: center;
+	width: 350px;
+	height: 150px;
+	padding: 5px;
+	margin-top: -10px;
+	margin-left: 10px;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	border: none;
+	border-radius: 10px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.page_button img {
+	width: 60px;
+	height: 60px;
+	position: relative;
+	top: 15px;
+}
+
+.page_button h6 {
+	margin: auto;
+	margin-top: -20px;
+	color: #aaaaaa;
+}
+
+footer {
+	position: absolute;
+	width: 412px;
+	text-align: center;
+	top: 770px;
+	color: gray;
+}

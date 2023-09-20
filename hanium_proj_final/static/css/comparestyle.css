@@ -1,0 +1,134 @@
+/* Set font style for the entire page */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* Style the main heading */
+h1 {
+    margin: 50px auto;
+    text-align: center;
+    
+}
+
+h2 {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    color: black;
+    
+}
+h3 {
+    text-align: center;
+    margin: 0;
+    padding: 10px;
+    color: white;
+    background-color: #00462a;
+    height: 5vh;
+    
+}
+
+
+/* Style the container for comparison results */
+.compare-container {
+    display: flex;
+    flex-direction: row;
+    
+    /* Stack input containers on top of each other */
+}
+
+.nottitle {
+    background-color: #e4f0eb;
+    padding: 30px;
+    min-height: 100vh; /* Make the container at least the height of the viewport */
+}
+
+/* Style each input container */
+.input-container, .diff-container {
+    border: 2px solid #00462a; /* Add a thin border with a blue color */
+    padding: 0;
+    margin-bottom: 20px;
+    height: 30vh;
+    min-width: 50%;
+  
+}
+.input-container p, .diff-container p{
+    font-size: 24px;
+    
+}
+
+ /* 
+  @media screen and (max-width: 768px) {
+      .input-container, .diff-container {
+          display: block;
+          justify-content: center;
+          width: 100%;
+          text-align: center;
+      }
+  }
+    
+   
+    .inputs, .results, .fixs {
+        height: auto;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    
+
+    footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f5f5f5;
+        padding: 10px;
+        text-align: center;
+        color: gray;
+    }
+*/
+
+/* Adjust layout for smaller screens */
+@media screen and (max-width: 768px) {
+    .compare-container {
+        flex-direction: column; /* Change to column to align elements vertically */
+    }
+    /*
+    .input-container, .diff-container {
+        flex: 1; 
+        margin-right: 0; 
+        margin-bottom: 20px; 
+        display: block; 
+        justify-content: center; 
+        width: 100%; 
+        text-align: center; 
+    }
+    */
+    .inputs, .results, .fixs {
+        height: auto;
+        padding: 10px; /* Adjust height as needed */
+    }
+}
+    footer {
+        /*
+        position: fixed;
+        margin: 20px auto;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #f5f5f5;
+        padding: 15px;
+        text-align: center;
+        color: gray;
+        font-size: 24px;
+        */
+        font-size: 24px;
+      color: gray;  
+      margin: 20px auto;
+      text-align: center;
+
+    }
+
+

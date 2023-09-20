@@ -1,0 +1,110 @@
+body {
+	position: flex;
+	justify-content: center;
+    align-items: center;
+	height: 800px;
+	width: 412px;
+	/*height: 100vh; */
+	margin: 0 auto;
+	background-color: #F5F5F5;
+}
+
+
+h1 {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: -15px;
+	height: 100px;
+	text-align: center;
+	background-color: #f9e000;
+}
+
+h1 img {
+	width: 70px;
+	height: 70px;
+	position: relative;
+	top: 20px;
+}
+
+.page_box {
+	display: block;
+	position: relative;
+	height: 650px;
+}
+
+.page_button {
+	display: inline-block;
+	position: relative; /* 이거임 */
+	float: left;
+	width: 400px;
+	height: 190px;
+	margin: 15px auto;
+	justify-content: center;
+	text-align: center;
+}
+
+
+.page_button a {
+	display: inline-block;
+	position: relative;
+	justify-content: center;
+	text-align: center;
+	width: 350px;
+	height: 190px;
+	padding: 5px;
+	margin-top: -10px;
+	margin-left: 10px;
+	background-color: white;
+	color: black;
+	text-decoration: none;
+	border: none;
+	border-radius: 10px;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.page_button img {
+	width: 60px;
+	height: 60px;
+	position: relative;
+	top: 15px;
+}
+
+.page_button h6 {
+	margin: -10px auto;
+	color: #aaaaaa;
+}
+
+/* 층별 버튼 위치 조정 
+.page_button a:nth-child(1) {
+	z-index: 3;
+}
+
+.page_button a:nth-child(2) {
+	z-index: 2;
+}
+
+.page_button a:nth-child(3) {
+	z-index: 1;
+}*/
+
+/* 화면 크기에 따라 버튼들이 세로로 나열되도록 설정 
+@media screen and (max-width: 768px) {
+	.page_button {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.page_button a {
+		width: 60%; 
+		height: 100%;
+	}
+}*/
+
+footer {
+	position: absolute;
+	width: 412px;
+	text-align: center;
+	top: 770px;
+	color: gray;
+}
