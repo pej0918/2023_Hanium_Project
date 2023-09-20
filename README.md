@@ -1,8 +1,9 @@
 # 2023_Hanium_Project
 #### E-yes : 시각장애인 교육용 점자 번역 및 문서 요약 시스템 개발
+팀명 : E-yes
 팀원 : 김희진, 박보영, 박은주, 정지혜
 
-#### 사용자 UI/UX에 대한 간략한 설명
+### 사용자 UI/UX에 대한 간략한 설명
 
 ![image](https://github.com/pej0918/2023_Hanium_Project/assets/79118751/ea0747ec-8745-44de-80ad-c947cea7270e)
 
