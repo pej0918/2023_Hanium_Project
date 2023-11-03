@@ -8,8 +8,7 @@ from BrailleToKorean.BrailleToKor import BrailleToKor
 
 # 문서 요약: 모델 및 Tokenizer 불러오기
 import torch 
-import transformers  
- 
+import transformers 
      
 from transformers import PreTrainedTokenizerFast, BartForConditionalGeneration
 
@@ -37,6 +36,7 @@ import IPython.display as ipd
 import requests
 import json
 import warnings
+import googletrans
 
 #PDF에서 글자 읽어오기 및 PDF로 저장
 warnings.filterwarnings('ignore')
@@ -130,31 +130,35 @@ def grammar_test_ko(text):
 
         # 응답에서 필요한 내용 추출 (html 파싱)
         data = response.text.split('data = [', 1)[-1].rsplit('];', 1)[0]
+
         
-        try:
-            data = json.loads(data)
-            # 교정 내용 담기
-            for i in range(len(data['errInfo'])):
-                correct_text=data['errInfo'][i]['candWord'].split('|')[0]
-                if correct_text == "":
-                    return "grammar_error"
-                notcorrect=data['errInfo'][i]['orgStr']
-                print("correct: " + correct_text)
-                print("not correct: " + notcorrect)
+        #try:
+        data = json.loads(data)
+        # 교정 내용 담기
+        for i in range(len(data['errInfo'])):
+            correct_text=data['errInfo'][i]['candWord'].split('|')[0]
+            if correct_text == "":
+                continue
+            notcorrect=data['errInfo'][i]['orgStr']
 
-                # 기존 내용 -> 교정 내용 change
-                text = text.replace(notcorrect,correct_text)
-                origin_text = notcorrect+' → '+correct_text
-                print("origin_text: " + origin_text)
-                print("text: " + text)
-                change_list.append(origin_text)
+            # 기존 내용 -> 교정 내용 change
+            text = text.replace(notcorrect, correct_text)
+            origin_text = notcorrect+' → '+correct_text
+            change_list.append(origin_text)
 
-            change_list.append(text)
-            return change_list
+        change_list.append(text)
+        return change_list
+
+        '''
         except:
+            print(">> except <<")
             change_list.append(res)
             change_list.append(text)
+            print("change_list")
+            print(change_list)
+            print("함수 끝")
             return change_list
+        '''
 
         
 #영어 맞춤법 검사
@@ -202,28 +206,49 @@ def grammar_test_en(text):
 
 
 # 번역
-papago_id = "ucWN1NYU3VpbYcuxAKTq"
-papago_pw = "shWp9ApkCt"
+papago_id = ["ucWN1NYU3VpbYcuxAKTq", "WDabw3tOaJ92cdsSOYBM", "67yLJrqrEgQHP97YkARL", "feWB1xtcxXfcnQIS6jAk", "jmdG3jgZeQ53a68yvQp8", "UFrU8d7ZE24fIn2gSpPq", "gwcICX3GYHAfBEBSYAPm"]
+papago_pw = ["2Rw4DKSIMU", "btRTA8My7I", "EZribMG0TN", "Uc7xjfpnMc", "hw2s53SeH9", "2Rw4DKSIMU", "dz9DZejpM0"]
+
+###papago_idx = 0
 
 def translateLanguage(text, lan1, lan2):
     trans_data = None
+    '''
     data = {'text': text, 'source': lan1, 'target': lan2}
     url = "https://openapi.naver.com/v1/papago/n2mt"
     global papago_id
     global papago_pw
+    global papago_idx
 
-    header = {"X-Naver-Client-Id": papago_id,
-              "X-Naver-Client-Secret": papago_pw}
+    header = {"X-Naver-Client-Id": papago_id[papago_idx],
+              "X-Naver-Client-Secret": papago_pw[papago_idx]}
+    try:
+        response = requests.post(url, headers=header, data=data)
+        rescode = response.status_code
 
-    response = requests.post(url, headers=header, data=data)
-    rescode = response.status_code
-
-    if(rescode == 200):
-        send_data = response.json()
+        if(rescode == 200):
+            send_data = response.json()
         trans_data = (send_data['message']['result']['translatedText'])
-    else:
-        print("Error Code:", rescode)
-        return -10000
+    except:
+        papago_idx += 1
+        header = {"X-Naver-Client-Id": papago_id[papago_idx],
+              "X-Naver-Client-Secret": papago_pw[papago_idx]}
+        
+        if (papago_idx >= len(papago_id)):
+            papago_idx = 0
+        response = requests.post(url, headers=header, data=data)
+        rescode = response.status_code
+
+        if(rescode == 200):
+            send_data = response.json()
+            trans_data = (send_data['message']['result']['translatedText'])
+        else:
+            print("Error Code:", rescode)
+            return -10000
+            '''
+    translator = googletrans.Translator()
+    result_trans = translator.translate(text, dest=lan2)
+    trans_data = result_trans.text
     return trans_data
 
 # 한글 음성 변환
@@ -309,6 +334,7 @@ def getInput():
                     grammar_before_result = result
                 if grammar_check == "grammar":
                     #result2=result
+                    grammar_before_result = result #추가함
                     result = grammar_test_ko(str(result)) # 한글 맞춤법 검사
                     print("################################\n")
                     print("바뀐 텍스트: "+ str(result[-1]))
@@ -352,6 +378,7 @@ def getInput():
                     print("문법교정 전"+grammar_before_result)
                 if grammar_check:
                     #result2=result
+                    grammar_before_result = result #추가함
                     result = grammar_test_en(result)# 영어 맞춤법 검사
                     print(result)
                     change_result=result[:-1]
@@ -393,7 +420,7 @@ def getInput():
                     elif output_language == 'korb':
                         result = KorToBraille().korTranslate(result)
         
-        print("grammar_before_result:" + grammar_before_result)
+        #print("grammar_before_result:" + grammar_before_result)
         
         return redirect(url_for("result", result=result, total_result=result, grammar_result=grammar_result, grammar_before_result=grammar_before_result, compare_result=change_result, pdf_file_path=pdf_file_path, audio_file_path=audio_file_path, input_language=input_language, output_language=output_language, text_input=text_input))
     return render_template("getInput.html")
@@ -686,7 +713,7 @@ def summary_en():
     
     #뉴스 기사로 사전 학습된 모델 이용
     tokenizer=PreTrainedTokenizerFast.from_pretrained("ainize/kobart-news")
-    model=BartForConditionalGeneration.from_pretrained("ainize/kobart-news")
+    model=BartForConditionalGeneration.from_pretrained("ainize/kobart-news", from_tf=True)
     
     if request.method == 'POST':
         text=request.form["text_input"]
@@ -809,7 +836,5 @@ def upload_file_translate():
 
 
 if __name__ == "__main__":
-    application.run(host='0.0.0.0', debug=True)
-    # application.run(host='localhost', port=5000, debug=True)
-
-
+    #application.run(host='0.0.0.0', debug=True)
+    application.run(host='0.0.0.0', port=8000, debug=True)
